@@ -1,0 +1,6 @@
+wget "https://jsonplaceholder.typicode.com/posts" -O "sample/posts.json"
+wget "https://jsonplaceholder.typicode.com/comments" -O "sample/comments.json"
+wget "https://jsonplaceholder.typicode.com/albums" -O "sample/albums.json"
+wget "https://jsonplaceholder.typicode.com/photos" -O "sample/photos.json"
+wget "https://jsonplaceholder.typicode.com/todos" -O "sample/todos.json"
+wget "https://jsonplaceholder.typicode.com/users" -O "sample/users.json"

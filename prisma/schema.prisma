@@ -103,7 +103,7 @@ model Photo {
 model Post {
   id    Int    @id() @default(autoincrement())
   title String @db.VarChar(255)
-  body  String @db.VarChar(255)
+  body  String @db.VarChar(1023)
 
   userId  Int       @map("user_id")
   user    User      @relation(fields: [userId], references: [id])
@@ -116,7 +116,7 @@ model Comment {
   id    Int    @id() @default(autoincrement())
   name  String @db.VarChar(255)
   email String @db.VarChar(255)
-  body  String @db.VarChar(255)
+  body  String @db.VarChar(1023)
 
   postId Int  @map("post_id")
   post   Post @relation(fields: [postId], references: [id])

@@ -77,7 +77,7 @@ CREATE TABLE "photos" (
 CREATE TABLE "posts" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
-    "body" VARCHAR(255) NOT NULL,
+    "body" VARCHAR(1023) NOT NULL,
     "user_id" INTEGER NOT NULL,
 
     CONSTRAINT "posts_pkey" PRIMARY KEY ("id")
@@ -88,7 +88,7 @@ CREATE TABLE "comments" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
-    "body" VARCHAR(255) NOT NULL,
+    "body" VARCHAR(1023) NOT NULL,
     "post_id" INTEGER NOT NULL,
 
     CONSTRAINT "comments_pkey" PRIMARY KEY ("id")
