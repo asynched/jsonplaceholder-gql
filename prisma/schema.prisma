@@ -38,7 +38,7 @@ model Address {
   userId Int  @unique() @map("user_id")
   user   User @relation(fields: [userId], references: [id])
 
-  geo Geo[]
+  geo Geo?
 
   @@map("addresses")
 }
@@ -48,7 +48,7 @@ model Geo {
   lat String @db.VarChar(255)
   lng String @db.VarChar(255)
 
-  addressId Int     @map("address_id")
+  addressId Int     @unique() @map("address_id")
   address   Address @relation(fields: [addressId], references: [id])
 
   @@map("geo")

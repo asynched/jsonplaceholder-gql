@@ -1,9 +1,11 @@
 import { join } from 'node:path'
-import { Module } from '@nestjs/common'
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { UsersModule } from '@/users/users.module'
 import { TodosModule } from '@/todos/todos.module'
+import { AlbumsModule } from '@/albums/albums.module'
+import { LoggerMiddleware } from '@/middlewares/logger.middleware'
 
 @Module({
   imports: [
@@ -15,6 +17,11 @@ import { TodosModule } from '@/todos/todos.module'
     }),
     UsersModule,
     TodosModule,
+    AlbumsModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*')
+  }
+}

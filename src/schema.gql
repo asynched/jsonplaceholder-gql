@@ -2,9 +2,43 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Address {
+  city: String!
+  geo: Geo!
+  street: String!
+  suite: String!
+  zipcode: String!
+}
+
+type Album {
+  id: Int!
+  photos: [Photo!]!
+  title: String!
+  userId: Int!
+}
+
+type Company {
+  bs: String!
+  catchPhrase: String!
+  name: String!
+}
+
+type Geo {
+  lat: String!
+  lng: String!
+}
+
+type Photo {
+  albumId: Int!
+  id: Int!
+  thumbnailUrl: String!
+  title: String!
+  url: String!
+}
+
 type Query {
-  allUsers: [User!]!
-  userById(id: Int!): User
+  user(id: Int!): User
+  users(page: Int! = 1, size: Int! = 10): [User!]!
 }
 
 type Todo {
@@ -15,11 +49,14 @@ type Todo {
 }
 
 type User {
+  address: Address!
+  albums(page: Int! = 1, size: Int! = 10): [Album!]!
+  company: Company!
   email: String!
   id: Int!
   name: String!
   phone: String!
-  todos: [Todo!]!
+  todos(page: Int! = 1, size: Int! = 10): [Todo!]!
   username: String!
   website: String!
 }

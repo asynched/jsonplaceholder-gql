@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class Todo {
+export class Photo {
   @Field(() => Int)
   id: number
 
@@ -9,8 +9,11 @@ export class Todo {
   title: string
 
   @Field()
-  completed: boolean
+  url: string
+
+  @Field()
+  thumbnailUrl: string
 
   @Field(() => Int)
-  userId: number
+  albumId: number
 }
