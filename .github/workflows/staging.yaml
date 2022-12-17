@@ -20,6 +20,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             export NVM_DIR="$HOME/.nvm"
+            source $NVM_DIR/nvm.sh
             cd /var/www/json-placeholder-staging
             git checkout ${{ GITHUB_REF_NAME }}
             git pull
