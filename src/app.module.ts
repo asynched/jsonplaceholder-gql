@@ -1,14 +1,20 @@
 import { join } from 'node:path'
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
+import { ThrottlerModule } from '@nestjs/throttler'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { UsersModule } from '@/users/users.module'
 import { TodosModule } from '@/todos/todos.module'
 import { AlbumsModule } from '@/albums/albums.module'
+import { PostsModule } from '@/posts/posts.module'
 import { LoggerMiddleware } from '@/middlewares/logger.middleware'
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src', 'schema.gql'),
       sortSchema: true,
@@ -18,6 +24,7 @@ import { LoggerMiddleware } from '@/middlewares/logger.middleware'
     UsersModule,
     TodosModule,
     AlbumsModule,
+    PostsModule,
   ],
 })
 export class AppModule implements NestModule {

@@ -2,7 +2,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Todo } from '@/gql/todo.model'
 import { Address } from '@/gql/address.model'
 import { Company } from '@/gql/company.model'
-import { Album } from './album.model'
+import { Album } from '@/gql/album.model'
+import { Post } from '@/gql/post.model'
 
 @ObjectType()
 export class User {
@@ -35,4 +36,7 @@ export class User {
 
   @Field(() => [Album])
   albums: Album[]
+
+  @Field(() => [Post])
+  posts: Post[]
 }

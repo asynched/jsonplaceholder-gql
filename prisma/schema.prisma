@@ -105,9 +105,9 @@ model Post {
   title String @db.VarChar(255)
   body  String @db.VarChar(1023)
 
-  userId  Int       @map("user_id")
-  user    User      @relation(fields: [userId], references: [id])
-  Comment Comment[]
+  userId   Int       @map("user_id")
+  user     User      @relation(fields: [userId], references: [id])
+  comments Comment[]
 
   @@map("posts")
 }

@@ -1,0 +1,26 @@
+name: 'Deploy to production environment'
+
+on:
+  push:
+    branches:
+      - '!master'
+
+jobs:
+  build:
+    environment: staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Clone repository'
+        uses: actions/checkout@v2
+      - name: 'Deploy to remote server'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd /var/www/json-placeholder-staging
+            git pull
+            yarn
+            yarn build
+            pm2 restart json-placeholder-staging

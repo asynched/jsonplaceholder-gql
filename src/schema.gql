@@ -17,6 +17,14 @@ type Album {
   userId: Int!
 }
 
+type Comment {
+  body: String!
+  email: String!
+  id: Int!
+  name: String!
+  postId: Int!
+}
+
 type Company {
   bs: String!
   catchPhrase: String!
@@ -36,6 +44,14 @@ type Photo {
   url: String!
 }
 
+type Post {
+  body: String!
+  comments: [Comment!]!
+  id: Int!
+  title: String!
+  userId: Int!
+}
+
 type Query {
   user(id: Int!): User
   users(page: Int! = 1, size: Int! = 10): [User!]!
@@ -51,11 +67,13 @@ type Todo {
 type User {
   address: Address!
   albums(page: Int! = 1, size: Int! = 10): [Album!]!
+  comments: [Comment!]!
   company: Company!
   email: String!
   id: Int!
   name: String!
   phone: String!
+  posts(page: Int! = 1, size: Int! = 10): [Post!]!
   todos(page: Int! = 1, size: Int! = 10): [Todo!]!
   username: String!
   website: String!
