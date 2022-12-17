@@ -1,6 +1,7 @@
 node_modules
-data/*.json
 dist
+pg_data
+data/*.json
 
 # Keep environment variables out of version control
 .env

@@ -6,15 +6,15 @@ generator client {
 }
 
 datasource db {
-  provider = "postgres"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
   id       Int    @id() @default(autoincrement())
   name     String @db.VarChar(255)
-  username String @db.VarChar(255)
-  email    String @db.VarChar(255)
+  username String @unique() @db.VarChar(255)
+  email    String @unique() @db.VarChar(255)
   phone    String @db.VarChar(255)
   website  String @db.VarChar(255)
 
@@ -36,7 +36,7 @@ model Address {
   zipcode String @db.VarChar(255)
 
   userId Int  @unique() @map("user_id")
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   geo Geo?
 
@@ -49,7 +49,7 @@ model Geo {
   lng String @db.VarChar(255)
 
   addressId Int     @unique() @map("address_id")
-  address   Address @relation(fields: [addressId], references: [id])
+  address   Address @relation(fields: [addressId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("geo")
 }
@@ -61,7 +61,7 @@ model Company {
   bs          String @db.VarChar(255)
 
   userId Int  @unique() @map("user_id")
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("companies")
 }
@@ -72,7 +72,7 @@ model Todo {
   completed Boolean @default(false)
 
   userId Int  @map("user_id")
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("todos")
 }
@@ -82,7 +82,7 @@ model Album {
   title String @db.VarChar(255)
 
   userId Int     @map("user_id")
-  user   User    @relation(fields: [userId], references: [id])
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   photos Photo[]
 
   @@map("albums")
@@ -95,7 +95,7 @@ model Photo {
   thumbnailUrl String @map("thumbnail_url") @db.VarChar(255)
 
   albumId Int   @map("album_id")
-  album   Album @relation(fields: [albumId], references: [id])
+  album   Album @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("photos")
 }
@@ -106,7 +106,7 @@ model Post {
   body  String @db.VarChar(1023)
 
   userId   Int       @map("user_id")
-  user     User      @relation(fields: [userId], references: [id])
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   comments Comment[]
 
   @@map("posts")
@@ -119,7 +119,7 @@ model Comment {
   body  String @db.VarChar(1023)
 
   postId Int  @map("post_id")
-  post   Post @relation(fields: [postId], references: [id])
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("comments")
 }

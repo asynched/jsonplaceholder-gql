@@ -25,4 +25,4 @@ jobs:
             git pull
             yarn
             yarn build
-            pm2 restart json-placeholder-prd
+            pm2 restart json-placeholder-production

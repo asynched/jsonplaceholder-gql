@@ -12,7 +12,14 @@ const main = async () => {
 
   await client.$connect()
 
-  await client.user
+  await Promise.all([
+    client.user.deleteMany({}),
+    client.todo.deleteMany({}),
+    client.album.deleteMany({}),
+    client.photo.deleteMany({}),
+    client.post.deleteMany({}),
+    client.comment.deleteMany({}),
+  ])
 
   await Promise.all(
     users.map((user) =>
